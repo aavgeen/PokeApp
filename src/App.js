@@ -24,6 +24,7 @@ class App extends Component {
   }
 
   handleChangeType = function(value){
+    //CHANGE TYPE VARIABLE IN REDUX STORE
     this.setState({
       type: value
     })
@@ -70,24 +71,26 @@ class App extends Component {
   onChangeSearch = function(event){
     this.setState({
       searchTerm: event.target.value
-    })
+    });
+    //filter the items here to display.
   }
 
   render() {
     return (
       <div className="App">
-      <MuiThemeProvider theme={theme}>
-        <AppBar position="static" color="secondary" >
-          <Toolbar>
-            <Typography variant="display2">
-              My Poke App
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <TypeFooter handleChangeType={this.handleChangeType}/>
-        <SearchField onSearchChange={this.onChangeSearch}/>
-        <PokeList pokemons={this.state.pokemons} />
-      </MuiThemeProvider>
+        <MuiThemeProvider theme={theme}>
+          <AppBar position="static" color="secondary" >
+            <Toolbar>
+              <Typography variant="display2">
+                My Poke App
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <TypeFooter />
+          {/* Toggle icon to local search or full search */}
+          <SearchField onSearchChange={this.onChangeSearch}/>
+          <PokeList pokemons={this.state.pokemons} />
+        </MuiThemeProvider>
       </div>
     );
   }

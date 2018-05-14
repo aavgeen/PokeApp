@@ -22,8 +22,8 @@ export default class TypeFooter extends Component {
         this.handleChange(this.state.value);
     }
     handleChange = (val) => {
-        //Emit an Action here to supply to main app.
-        this.props.handleChangeType(val); //Because of index;
+        //Emit an Action here to supply to redux store of main app.
+        // this.props.handleChangeType(val); //Because of index;
     };
     render() {
         return (
@@ -35,7 +35,7 @@ export default class TypeFooter extends Component {
                 <Grid justify="center" spacing={Number(2)}> */}
                     <Tabs
                         value={this.state.value}
-                        onChange={this.handleChange(this.state.value+1)}
+                        onChange={this.handleChange()}
                         scrollable
                         scrollButtons="on"
                         indicatorColor="primary"
