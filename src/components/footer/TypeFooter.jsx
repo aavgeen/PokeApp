@@ -8,22 +8,21 @@ import HelpIcon from '@material-ui/icons/Help';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import ThumbDown from '@material-ui/icons/ThumbDown';
 import ThumbUp from '@material-ui/icons/ThumbUp';
-
+import {changeType} from '../../actions/pokemonType';
 
 export default class TypeFooter extends Component {
     constructor(props){
         super(props);
         this.state= {
-            value: 1
+            value: 0
         }
         this.handleChange = this.handleChange.bind(this);
     }
-    componentWillMount() {
-        this.handleChange(this.state.value);
-    }
-    handleChange = (val) => {
+
+    handleChange(){
         //Emit an Action here to supply to redux store of main app.
         // this.props.handleChangeType(val); //Because of index;
+        this.props.dispatch(changeType(this.state.value + 1));
     };
     render() {
         return (

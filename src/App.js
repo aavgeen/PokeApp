@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { AppBar, Toolbar, Typography, BottomNavigation } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { connect } from "react-redux";
 import theme from './appTheme';
 import './App.css';
 import SearchField from './components/searchField/SearchField';
@@ -95,8 +96,11 @@ class App extends Component {
     );
   }
 }
-
-export default App;
+const mapStateToProps = state => ({
+  searchTerm: state.searchTerm.searchTerm,
+  type: state.pokemonType.searchTerm,
+})
+export default connect(mapStateToProps)(App);
 
 const styles = {
   mainContent: {
