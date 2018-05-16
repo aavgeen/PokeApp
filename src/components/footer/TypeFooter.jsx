@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Paper, Grid, Tabs, Typography } from 'material-ui';
+// import PropTypes from 'prop-types';
+import { Paper, Tabs } from 'material-ui';
 import { Tab } from 'material-ui/Tabs';
 import TurnedInNot from '@material-ui/icons/TurnedInNot';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -30,7 +30,7 @@ export default class TypeFooter extends Component {
         <div style={styles.footer}>
             {/* <Typography variant="title" color="secondary">Type</Typography> */}
             <Paper elevation={6}>
-            {/* <Grid container spacing={8} justify="center">
+             {/* <Grid container spacing={8} justify="center">
                 <Grid item xs={12} sm={12}>
                 <Grid justify="center" spacing={Number(2)}> */}
                 <Tabs
@@ -61,7 +61,7 @@ export default class TypeFooter extends Component {
                     <Tab label="Fairy" icon={<ThumbUp />} />
                 {/* </Grid>
                 </Grid>
-            </Grid> */}
+            </Grid>*/} 
             </Tabs>
             </Paper>
         </div>

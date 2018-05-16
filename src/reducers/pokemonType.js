@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
             ...state,
             pokemonType: action.pokemonType,
             }
-        };
+        }
         default:
             return state;
     }

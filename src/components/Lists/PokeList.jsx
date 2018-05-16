@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PokeListItem from '../ListItem/PokeListItem';
-import {Grid} from 'material-ui';
 import GridList, { GridListTile } from 'material-ui/GridList';
 
 export default class PokeList extends Component {
@@ -13,7 +12,6 @@ export default class PokeList extends Component {
     }
 
     render() {
-        var innercontext = this;
         return (
         <div style={styles.gridlist}>
                 <GridList cellHeight={140}  cols={12} spacing={50}>
