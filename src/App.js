@@ -7,7 +7,8 @@ import './App.css';
 import SearchField from './components/searchField/SearchField';
 import TypeFooter from './components/footer/TypeFooter';
 import PokeList from './components/Lists/PokeList';
-
+import {changeType} from './actions/pokemonType';
+import {changeSearch} from './actions/searchTerm';
 
 var selected = false;
 var searched = false;
@@ -19,53 +20,66 @@ class App extends Component {
         pokemonList: [],
         searchTerm: "",
         pokemons: [],
+        filteredPokemons: [],
+
     }
-    this.handleChangeType = this.handleChangeType.bind(this);
+    this.onChangeType = this.onChangeType.bind(this);
     this.onChangeSearch = this.onChangeSearch.bind(this);
   }
 
-  handleChangeType = function(value){
+  componentDidMount (){
+    this.onChangeType(this.state.type);
+  }
+  onChangeType = function(value){
     //CHANGE TYPE VARIABLE IN REDUX STORE
+    console.log("onchangeTyep in app.js: ",value);
     this.setState({
       type: value
-    })
-    console.log(value);
-    this.setState({
-      pokemonList: [],
-      pokemons: []
-    })
-    //TODO ENABLE LOADING ICON HERE.
-    var API_URL = 'https://pokeapi.co/api/v2/type/';
-    fetch(API_URL+this.state.type+'/')
-    .then((result) => {
-        return result.json();
-    })
-    .then((data) => {
-      console.log(data.pokemon);
-      //TODO DISABLE LOADING ICON HERE.
+    },
+    //callback
+    function(){
+      this.props.dispatch(changeType(value));
       this.setState({
-        pokemonList: data.pokemon
-      });
-
-      //Filter the array for sending names and url
-      var poke=[];
-      this.state.pokemonList.forEach( pokem => {
-        var u  = (pokem.pokemon.url);
-        u=u.split("");
-        u = u.splice(34);
-        u.pop();
-        u=u.join("");
-        var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+u+".png";
-        poke.push({name: pokem.pokemon.name, imgurl: url, pokeurl: pokem.pokemon.url});
-      });
-      console.log(poke);
-      this.setState({
-        pokemons: poke
-      });
-
-    }).catch(err => {//TODO DISABLE LOADING ICON HERE.
-                      //Call/Enable the dialog with "PROBLEM IN FETCHING"
-                      console.log(err)});
+        pokemonList: [],
+        pokemons: [],
+        filteredPokemons: []
+      })
+      //TODO ENABLE LOADING ICON HERE.
+      var API_URL = 'https://pokeapi.co/api/v2/type/';
+      fetch(API_URL+this.state.type+'/')
+      .then((result) => {
+          return result.json();
+      })
+      .then((data) => {
+        console.log(data.pokemon);
+        //TODO DISABLE LOADING ICON HERE.
+        this.setState({
+          pokemonList: data.pokemon
+        });
+  
+        //Filter the array for sending names and url
+        var poke=[];
+        this.state.pokemonList.forEach( pokem => {
+          var u  = (pokem.pokemon.url);
+          u=u.split("");
+          u = u.splice(34);
+          u.pop();
+          u=u.join("");
+          var url = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+u+".png";
+          poke.push({name: pokem.pokemon.name, imgurl: url, pokeurl: pokem.pokemon.url});
+        });
+        console.log(poke);
+        this.setState({
+          pokemons: poke,
+          filteredPokemons: poke
+        });
+  
+      }).catch(err => {//TODO DISABLE LOADING ICON HERE.
+                        //Call/Enable the dialog with "PROBLEM IN FETCHING"
+                        console.log(err)});
+    }
+  );
+   
   }
 
 
@@ -73,7 +87,17 @@ class App extends Component {
     this.setState({
       searchTerm: event.target.value
     });
+    //DISPATCH TO STORE
+    this.props.dispatch(changeSearch(event.target.value));
     //filter the items here to display.
+    var updatedList = this.state.pokemons;
+    updatedList = updatedList.filter(function(item){
+      return item.name.toLowerCase().search(
+        event.target.value.toLowerCase()) !== -1;
+    });
+    this.setState({
+      filteredPokemons: updatedList
+    })
   }
 
   render() {
@@ -87,10 +111,10 @@ class App extends Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          <TypeFooter />
+          <TypeFooter onChangeType={this.onChangeType}/>
           {/* Toggle icon to local search or full search */}
           <SearchField onSearchChange={this.onChangeSearch}/>
-          <PokeList pokemons={this.state.pokemons} />
+          <PokeList pokemons={this.state.filteredPokemons} />
         </MuiThemeProvider>
       </div>
     );

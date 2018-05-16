@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import Search from '@material-ui/icons/Search';
-import {changeSearch} from '../../actions/searchTerm';
+
 
 class SearchField extends Component{
   static propTypes = { 
@@ -14,14 +14,7 @@ class SearchField extends Component{
     this.state= {
         value: 0,
     }
-    this.onSearchChange = this.handleChange.bind(this);
     }
-
-    onSearchChange = (event) => {
-        //Emit an Action here to supply to redux store of main app.
-        // this.props.handleChangeType(val); //Because of index;
-        this.props.dispatch(changeSearch(event.target.value));
-    };
   render(){
     return (
       <div>
@@ -31,7 +24,7 @@ class SearchField extends Component{
               fullWidth	= {true}
               autoFocus = {true}
               style={styles.searchInput}
-              onChange= {this.onSearchChange}
+              onChange= {this.props.onSearchChange}
               id="input-with-icon-adornment"
               startAdornment={
                 <InputAdornment position="start">
