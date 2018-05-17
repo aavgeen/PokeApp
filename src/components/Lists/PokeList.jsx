@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PokeListItem from '../ListItem/PokeListItem';
 import GridList, { GridListTile } from 'material-ui/GridList';
+import { Paper } from 'material-ui';
 
 export default class PokeList extends Component {
     constructor(props){
@@ -14,12 +15,16 @@ export default class PokeList extends Component {
     render() {
         return (
         <div style={styles.gridlist}>
-                <GridList cellHeight={140}  cols={12} spacing={50}>
+                <GridList cellHeight={160}  cols={12} spacing={50}>
                     {this.props.pokemons.map((tile, state) => (
                     <GridListTile key={tile.name} cols={2}>
-                        <PokeListItem   imgurl={tile.imgurl}
-                                        name={tile.name} 
-                                        pokeurl={tile.pokeurl} />
+                        <div style={styles.content}>
+                            <Paper elevation={4} square={true}>
+                                <PokeListItem   imgurl={tile.imgurl}
+                                                name={tile.name} 
+                                                pokeurl={tile.pokeurl} />
+                            </Paper>
+                        </div>
                     </GridListTile>
                 ))}
                 </GridList>
@@ -33,6 +38,9 @@ const styles = {
         marginLeft: 100,
         marginRight: 100,
         marginBottom:20,
-        marginTop: 30
+        marginTop: 20
+    },
+    content: {
+        margin: 5,
     }
 }
