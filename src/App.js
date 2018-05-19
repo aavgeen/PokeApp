@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppBar, Toolbar, Typography } from 'material-ui';
+import { AppBar, Toolbar, Typography, Grid } from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from "react-redux";
 import theme from './appTheme';
@@ -118,7 +118,11 @@ class App extends Component {
           </AppBar>
           <TypeFooter onChangeType={this.onChangeType}/>
           {/* Toggle icon to local search or full search */}
-          <SearchField onSearchChange={this.onChangeSearch}/>
+          <Grid container spacing={24}>
+            <Grid item xs={4} sm={4} lg={12} center>
+            <SearchField onSearchChange={this.onChangeSearch}/>
+            </Grid>
+          </Grid>
             {(this.state.isLoading) && <Loader />}
             {(!this.state.isLoading) && <PokeList pokemons={this.state.filteredPokemons} /> }
         </MuiThemeProvider>

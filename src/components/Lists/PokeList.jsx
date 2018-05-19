@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PokeListItem from '../ListItem/PokeListItem';
 import GridList, { GridListTile } from 'material-ui/GridList';
-import { Paper } from 'material-ui';
+import { Paper, Grid } from 'material-ui';
 
 export default class PokeList extends Component {
     constructor(props){
@@ -15,9 +15,9 @@ export default class PokeList extends Component {
     render() {
         return (
         <div style={styles.gridlist}>
-                <GridList cellHeight="auto"  cols={4} spacing={30}>
+                <GridList cellHeight="auto"  cols={10} spacing={30}>
                     {this.props.pokemons.map((tile, state) => (
-                    <GridListTile key={tile.name} cols={1}>
+                    <Grid key={tile.name} xs={10} sm={5} lg={2}>
                         <div style={styles.content}>
                             <Paper elevation={2} square={false}>
                                 <PokeListItem   imgurl={tile.imgurl}
@@ -25,7 +25,7 @@ export default class PokeList extends Component {
                                                 pokeurl={tile.pokeurl} />
                             </Paper>
                         </div>
-                    </GridListTile>
+                    </Grid>
                 ))}
                 </GridList>
         </div>
