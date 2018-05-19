@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { Paper, Tabs } from 'material-ui';
 import { Tab } from 'material-ui/Tabs';
-import TurnedInNot from '@material-ui/icons/TurnedInNot';
+import {TurnedInNot, FlightTakeoff, BugReport,
+         ViewModule, GroupWork, AcUnit,
+        Face, EventSeat, Label, HotTub,
+        Language, TurnedIn, ViewHeadline,
+        Gesture, Accessibility, SelectAll} from '@material-ui/icons';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import FlightTakeoff from '@material-ui/icons/FlightTakeoff';
 import HelpIcon from '@material-ui/icons/Help';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import ThumbDown from '@material-ui/icons/ThumbDown';
@@ -45,20 +48,20 @@ export default class TypeFooter extends Component {
                     <Tab label="Fighting" icon={<TurnedInNot />} />
                     <Tab label="Flyning" icon={<FlightTakeoff />} />
                     <Tab label="Poison" icon={<HelpIcon />} />
-                    <Tab label="Ground" icon={<ShoppingBasket />} />
-                    <Tab label="Rock" icon={<ThumbDown />} />
-                    <Tab label="Bug" icon={<ThumbUp />} />
-                    <Tab label="Ghost" icon={<ThumbUp />} />
-                    <Tab label="Steel" icon={<ThumbUp />} />
-                    <Tab label="Fire" icon={<ThumbUp />} />
-                    <Tab label="Water" icon={<ThumbUp />} />
-                    <Tab label="Grass" icon={<ThumbUp />} />
-                    <Tab label="Electric" icon={<ThumbUp />} />
-                    <Tab label="Psychic" icon={<ThumbUp />} />
-                    <Tab label="Ice" icon={<ThumbUp />} />
-                    <Tab label="Dragon" icon={<ThumbUp />} />
-                    <Tab label="Dark" icon={<ThumbUp />} />
-                    <Tab label="Fairy" icon={<ThumbUp />} />
+                    <Tab label="Ground" icon={<ViewModule />} />
+                    <Tab label="Rock" icon={<GroupWork />} />
+                    <Tab label="Bug" icon={<BugReport />} />
+                    <Tab label="Ghost" icon={<TurnedIn />} />
+                    <Tab label="Steel" icon={<Language />} />
+                    <Tab label="Fire" icon={<HotTub />} />
+                    <Tab label="Water" icon={<SelectAll />} />
+                    <Tab label="Grass" icon={<ViewHeadline />} />
+                    <Tab label="Electric" icon={<Gesture />} />
+                    <Tab label="Psychic" icon={<Accessibility />} />
+                    <Tab label="Ice" icon={<AcUnit />} />
+                    <Tab label="Dragon" icon={<EventSeat />} />
+                    <Tab label="Dark" icon={<Label />} />
+                    <Tab label="Fairy" icon={<Face />} />
                 {/* </Grid>
                 </Grid>
             </Grid>*/} 

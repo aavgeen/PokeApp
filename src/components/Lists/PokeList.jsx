@@ -15,11 +15,11 @@ export default class PokeList extends Component {
     render() {
         return (
         <div style={styles.gridlist}>
-                <GridList cellHeight={160}  cols={12} spacing={50}>
+                <GridList cellHeight="auto"  cols={4} spacing={30}>
                     {this.props.pokemons.map((tile, state) => (
-                    <GridListTile key={tile.name} cols={2}>
+                    <GridListTile key={tile.name} cols={1}>
                         <div style={styles.content}>
-                            <Paper elevation={4} square={true}>
+                            <Paper elevation={2} square={false}>
                                 <PokeListItem   imgurl={tile.imgurl}
                                                 name={tile.name} 
                                                 pokeurl={tile.pokeurl} />

@@ -36,6 +36,7 @@ export default class PokeListItem extends Component {
     getPokeData= () => {  
         //call the rest service to fetch the data for a particular pokemon.
         this.setState({isLoading: true});
+        console.log("Loader in get",this.state.isLoading);
         //We will show Types of the Pokemon, the moves, the abilities, the weight and base experience.
         fetch(this.props.pokeurl)
         .then((result) => {
@@ -45,53 +46,61 @@ export default class PokeListItem extends Component {
             //assign the data to respective state values.
             console.log(data);
             //Assign for the Types.
-            var types="";
+            var typesii="";
             data.types.forEach(ty => {
-                types+=ty.type.name+', '
+                typesii+=ty.type.name+', '
             });
-            this.setState(prevState => {
-                types: prevState.types+types
+            typesii = typesii.slice(0, -2);
+            typesii = typesii.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); })   
+            this.setState({
+                types: typesii
             });
-            console.log("Types: ",types);
+            console.log("Types: ",typesii);
             //Weight
-            this.setState(prevState => {
-                weight: prevState.weight+data.weight
+            this.setState({
+                weight: data.weight
             })
             //Base_XP
-            this.setState(prevState => {
-                base_XP: prevState.base_XP+data.base_XP
+            this.setState({
+                base_XP: data.base_experience
             })
             //Moves
-            var moves = "";
+            var movesii = "";
             data.moves.forEach(mv => {
-                moves+=mv.move.name+', '
+                movesii+=mv.move.name+', '
             });
-            console.log("Moves: ",moves);
-            this.setState(prevState => {
-                abilities: prevState.moves+moves
+            console.log("Moves: ",movesii);
+            movesii = movesii.slice(0, -2);
+            movesii = movesii.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); })
+            this.setState({
+                moves: movesii
             });
 
             //Abilities
-            var abilities = "";
+            var abilitiesii = "";
             data.abilities.forEach(abi => {
-                abilities+=abi.ability.name+', '
+                abilitiesii+=abi.ability.name+', '
             });
-            console.log("Abilities: ",abilities);
-            this.setState(prevState => {
-                abilities: prevState.abilities+abilities
+            abilitiesii = abilitiesii.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); })
+            console.log("Abilities: ",abilitiesii);
+            abilitiesii = abilitiesii.slice(0, -2);
+            this.setState({
+                abilities: abilitiesii
             });
-            
+            console.log("Disable loader.")
             this.setState({isLoading: false})
         });
     }
     handleClickOpen = () => {
         this.setState({ open: true });
-        console.log("Open Clicked", this.state.open)
+        console.log("Open Clicked", this.state.open);
+        this.setState({isLoading: true});
       };
     
     handleClose = () => {
-    this.setState({ open: false });
-    console.log("Close Clicked", this.state.open)
+        this.setState({ open: false });
+        console.log("Close Clicked", this.state.open);
+        this.setState({isLoading: true});
     };
 
   render() {
@@ -122,34 +131,35 @@ export default class PokeListItem extends Component {
                         </Typography>
                         </Toolbar>
                     </AppBar>
+                    {!(this.state.isLoading) &&
                     <div style={styles.dialogContent}>
-                        <List >
+                        <List style={styles.listContent}>
                             <img src={this.props.imgurl} alt={this.props.name} onError={() => {this.setState({show: false})}} height="150" width="150" />
                             <Divider />
                             <ListItem button>
-                                <ListItemText primary={"Types: "+this.state.types} secondary="" />
+                                <ListItemText primary={"Types: "} secondary={this.state.types} />
                             </ListItem>
                             <Divider />
                             <ListItem button>
-                                <ListItemText primary={"Weight: "+this.state.weight} secondary="" />
+                                <ListItemText primary={"Weight: "} secondary={this.state.weight} />
                             </ListItem>
                             <Divider />
                             <ListItem button>
-                                <ListItemText primary={"Moves: "+this.state.moves} secondary="" />
+                                <ListItemText primary={"Moves: "} secondary={this.state.moves} />
                             </ListItem>
                             <Divider />
                             <ListItem button>
-                                <ListItemText primary={"Base XP: "+this.state.base_XP} secondary="" />
+                                <ListItemText primary={"Base XP: "} secondary={this.state.base_XP} />
                             </ListItem>
                             <Divider />
-                            <ListItem>
-                                <ListItemText primary={"Abilities: "+this.state.abilities} secondary="" />
+                            <ListItem button>
+                                <ListItemText primary={"Abilities: "} secondary={this.state.abilities} />
                             </ListItem>
                             <Divider />
                         </List>
-                    </div>
-                    <Divider />
-                    {(this.state.isLoading) && <Loader/>}
+                    </div>}
+                    {(this.state.isLoading) && <div style={styles.dialogContent}><Loader/></div>}
+                    {/* <div style={styles.dialogContent}><Loader/></div> */}
                 </Dialog>
             </div>
         )
@@ -171,7 +181,11 @@ const styles = {
         height: 150,
     },
     dialogContent: {
-        marginTop:60,
+        marginTop:65,
+    },
+    listContent: {
+        alignContent: 'center',
+        justifyContent: 'center'
     }
 }
 
