@@ -5,12 +5,16 @@ A Reactjs webapp which uses PokeAPI and uses it to fetch the information about p
 
 <p align="center">
   <p align="center"><img src="https://github.com/aavgeen1/PokeApp/blob/master/screenshots/pokeapp1.jpg" width="750"/>
-  <span>All Pokemons of flying type.</span>
+  </br><span>All Pokemons of flying type.</span>
   </p>
+  </br>
+  </br>
    <p align="center"><img src="https://github.com/aavgeen1/PokeApp/blob/master/screenshots/pokeapp2.jpg" width="750"/>
-  <span>Search Results for 'bat'.</span>
+  </br><span>Search Results for 'bat'.</span>
   </p>
+  </br>
+  </br>
    <p align="center"><img src="https://github.com/aavgeen1/PokeApp/blob/master/screenshots/pokeapp3.jpg" width="750"/>
-  <span>Information about pokemon, "Registeel".</span>
+  </br><span>Information about pokemon, "Registeel".</span>
   </p>
 </p>
